@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.java.instructor.spring.kafka.entity.Employee;
+import com.java.instructor.spring.kafka.entity.Store;
 
 @RestController
 public class ProducerController {
@@ -23,7 +23,7 @@ public class ProducerController {
 	private Gson gson;
 
 	@PostMapping("/produce")
-	public ResponseEntity<String> postModelToKafka(@RequestBody Employee emp)
+	public ResponseEntity<String> postModelToKafka(@RequestBody Store emp)
 			throws InterruptedException, ExecutionException {
 		CompletableFuture<SendResult<String, String>> result = (CompletableFuture<SendResult<String, String>>) kafkaTemplate
 				.send("TestTopic", gson.toJson(emp));

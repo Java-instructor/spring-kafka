@@ -6,17 +6,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.google.gson.Gson;
-import com.java.instructor.spring.kafka.entity.Employee;
+import com.java.instructor.spring.kafka.entity.Store;
 
 @Controller
 public class ConsumerController {
 	
 	@Autowired
     private Gson gson;
+	
     @KafkaListener(topics = { "TestTopic" })
     public void getTopics(@RequestBody String emp) {
         System.out.println("Kafka event consumed is: " + emp);
-        Employee model = gson.fromJson(emp, Employee.class);
+        Store model = gson.fromJson(emp, Store.class);
         System.out.println("Model converted value: " + model.toString());
     }
 
